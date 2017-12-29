@@ -1,0 +1,59 @@
+general {
+	output_format = "i3bar"
+	colors = true
+	interval = 5
+}
+
+order += "volume master"
+order += "disk /"
+order += "cpu_temperature 0"
+order += "cpu_usage"
+order += "load"
+order += "wireless wlan0"
+order += "ethernet bge0"
+order += "battery 0"
+order += "tztime local"
+
+volume master {
+	format = "♪:%volume" 
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+cpu_temperature 0 {
+  format = "%degrees°C"
+}
+
+cpu_usage {
+	format = "%usage"
+}
+
+wireless wlan0 {
+	format_up = "wlan0: %ip (%essid)"
+	format_down = "wlan0: down"
+}
+
+ethernet bge0 {
+	format_up = "bge0: %ip (%speed)"
+	format_down = "bge0: down"
+}
+
+battery 0 {
+	format = "%status %percentage %remaining"
+	path = "/sys/class/power_supply/BAT%d/uevent"
+	low_threshold = 10
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M"
+}
+
+load {
+	format = "Δ:%1min"
+}
+
+disk "/" {
+	format = "%avail"
+}
+
