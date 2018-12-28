@@ -1,7 +1,7 @@
 general {
-	output_format = "i3bar"
-	colors = true
-	interval = 5
+ output_format = "i3bar"
+ colors = true
+ interval = 5
 }
 
 order += "volume master"
@@ -11,14 +11,16 @@ order += "cpu_usage"
 order += "load"
 order += "wireless wlan0"
 order += "ethernet bge0"
+order += "ethernet ue0"
+order += "path_exists VPN"
 order += "battery 0"
 order += "tztime local"
 
 volume master {
-	format = "♪:%volume" 
-	device = "default"
-	mixer = "Master"
-	mixer_idx = 0
+ format = "♪:%volume" 
+ device = "default"
+ mixer = "Master"
+ mixer_idx = 0
 }
 
 cpu_temperature 0 {
@@ -26,34 +28,44 @@ cpu_temperature 0 {
 }
 
 cpu_usage {
-	format = "%usage"
+ format = "%usage"
 }
 
 wireless wlan0 {
-	format_up = "wlan0: %ip (%essid)"
-	format_down = "wlan0: down"
+ format_up = "wlan0: %ip (%essid)"
+ format_down = "wlan0: down"
 }
 
 ethernet bge0 {
-	format_up = "bge0: %ip (%speed)"
-	format_down = "bge0: down"
+ format_up = "bge0: %ip (%speed)"
+ format_down = "bge0: down"
+}
+
+ethernet ue0 {
+ format_up = "ue0: %ip"
+ format_down = "ue0: down"
+}
+
+path_exists VPN {
+  path = "/dev/tun0"
+  format_down = ""
+  format = "VPN"
 }
 
 battery 0 {
-	format = "%status %percentage %remaining"
-	path = "/sys/class/power_supply/BAT%d/uevent"
-	low_threshold = 10
+ format = "%status %percentage %remaining"
+ path = "/sys/class/power_supply/BAT%d/uevent"
+ low_threshold = 10
 }
 
 tztime local {
-	format = "%Y-%m-%d %H:%M"
+ format = "%Y-%m-%d %H:%M"
 }
 
 load {
-	format = "Δ:%1min"
+ format = "Δ:%1min"
 }
 
 disk "/" {
-	format = "%avail"
+ format = "%avail"
 }
-
