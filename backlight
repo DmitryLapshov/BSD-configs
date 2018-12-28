@@ -1,0 +1,15 @@
+#!/bin/sh
+# PROVIDE: backlight
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name=backlight
+rcvar=backlight_enable
+load_rc_config $name
+
+start_cmd="/usr/local/bin/intel_backlight 80"
+stop_cmd="/usr/local/bin/intel_backlight 100"
+
+run_rc_command "$1"
